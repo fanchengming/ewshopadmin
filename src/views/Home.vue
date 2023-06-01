@@ -1,11 +1,10 @@
 <template>
     <div>
-      <router-view></router-view>
+        Home
     </div>
 </template>
 
 <script lang="ts" setup>
-
 
 </script>
 

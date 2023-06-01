@@ -1,6 +1,6 @@
 <template>
     <div>
-      <router-view></router-view>
+        控制台
     </div>
 </template>
 
