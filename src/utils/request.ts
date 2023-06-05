@@ -10,7 +10,10 @@ request.interceptors.request.use(
     config => {
         // config 接口请求的配置信息
         const token: string | null = localStorage.getItem('token');
-        if (token !== '') config.headers['Authorization'] = `Bearer ${token}`
+        if (token !== '') {
+            config.headers['Authorization'] = `Bearer ${token}`
+        }
+        
         return config;
     },
     error => {
@@ -21,12 +24,31 @@ request.interceptors.request.use(
 // 4.定义响应拦截器，响应拦截器，请求发送出去之后触发的
 request.interceptors.response.use(
     response => {
-       
-    
+
         return response;
     },
     error => {
         // 报错的时候出一个报错信息
+        const {response} = error;
+        switch (response.status) {
+            case 401:
+                window.$message.error('登录失败，请重新登录')
+                localStorage.removeItem('token');
+                setTimeout(() => {
+                    window.location.href = '/login'
+                },500)
+                break;
+            case 404:
+                window.$message.error('接口不存在')
+                break;
+            case 500:
+            case 502:
+                window.$message.error('网络异常')
+                break;
+            case 422:
+                window.$message.error('参数错误')
+                break;
+        }
         return Promise.reject(error);
     }
 )

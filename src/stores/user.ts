@@ -23,15 +23,28 @@ export const useUserStore = defineStore({
             return this.token;
         },
         getAvatar():string {
+            console.log(this)
             return this.avatar;
         },
-        getNickName():string {
+        getUserName():string {
+            // console.log(222)
+            // console.log(this)
+            // console.log(this.username)
             return this.username;
         },
         getPermissions():string[] {
             return this.permissions;
         },
         getUserInfo():object {
+            // 判断 this.info 是否是空对象
+            // if(this.info?.id){
+            //     console.log('12312312')
+            // }else {
+            //     console.log('456')
+            // }
+            if(!this.info?.id) {
+                this.getUser();
+            }
             return this.info;
         }
     },
@@ -46,6 +59,9 @@ export const useUserStore = defineStore({
         setUserInfo(info:object) {
             this.info = info;
         },
+        setUserName(username:string) {
+            this.username = username;
+         },
         setPermissions(permissions:string[]) {
             this.permissions = permissions;
         },
@@ -67,8 +83,9 @@ export const useUserStore = defineStore({
                 const response = await user();
                 console.log(response);
                 this.setUserInfo(response);
-                this.setAvatar(response.data.avatar);
+                this.setAvatar(response.data.avatar_url);
                 this.setUserName(response.data.name);
+                return response;
             } catch(error) {
                 console.log(error);
             }

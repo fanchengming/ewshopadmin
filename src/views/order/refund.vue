@@ -1,9 +1,6 @@
 <template>
     <div>
-      <n-message-provider>
-        <router-view></router-view>
-      </n-message-provider>
-      
+        退款订单
     </div>
 </template>
 
