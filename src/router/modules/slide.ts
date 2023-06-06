@@ -3,7 +3,7 @@ import Layout from '@/layout/index.vue'
 import {Body} from '@vicons/ionicons5'
 import {renderIcon} from '@/utils'
 
-const routeName = 'users'
+const routeName = 'slide'
 /**
  * @param name 路由名称, 必须设置,且不能重名
  * @param meta 路由元信息（路由附带扩展信息）
@@ -16,25 +16,24 @@ const routeName = 'users'
  * */
 const routes: Array<RouteRecordRaw> = [
     {
-        path: '/users',
+        path: '/slide',
         name: routeName,
         component: Layout,
-        redirect:'/users/list',
+        redirect:'/slide/list',
         meta: {
-            title: '用户管理',
+            title: '轮播图管理',
             icon: renderIcon(Body),
-            sort:1,
-            permissions: ['users','admin']
+            sort:6,
         },
         children: [
                {
                     path: 'list',
                     name: `${routeName}_list`,
                     meta: {
-                        title: '用户列表',
+                        title: '轮播图列表',
                         icon: renderIcon(Body),
                     },
-                   component: () => import('@/views/users/index.vue'),
+                   component: () => import('@/views/slide/index.vue'),
             }]
     }
 ];

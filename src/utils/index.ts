@@ -14,9 +14,7 @@ export const renderIcon =  (icon:Component) : Component =>{
 export function generatorMenu(routerMap: Array<any>) {
     // routerMap 按照 sort 排序
     routerMap.sort((a,b) => a.meta.sort - b.meta.sort);
-
     let result = routerMap.map((item) => {
-
         let menu = {
             label: item?.meta?.title,
             key: item?.name,
@@ -24,10 +22,12 @@ export function generatorMenu(routerMap: Array<any>) {
         }
         if(item.children && item.children.length > 1) {
             menu.children = generatorMenu(item.children)
+        }else if(item.children && item.children.length === 1) {
+            menu.key = item.children[0].name
         }
         return menu
     })
-    return result;
+    return result
         // routerMap 按照 sort 排序
         // routerMap.sort((a, b) => a.meta.sort - b.meta.sort);
         // let result = routerMap.map((item) => {

@@ -81,7 +81,7 @@ export const useUserStore = defineStore({
         async getUser(){
             try {
                 const response = await user();
-                console.log(response);
+                // console.log(response);
                 this.setUserInfo(response);
                 this.setAvatar(response.data.avatar_url);
                 this.setUserName(response.data.name);
